@@ -1,13 +1,32 @@
+"use client";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+
+
+const getFromLocalStorage = (key: string) => {
+  if (!key || typeof window === "undefined") {
+    return "";
+  }
+  return localStorage.getItem(key);
+};
 
 export interface DataState {
   data: Array<any>;
 }
 
-const initialState: DataState = {
-  data: [],
-};
+let tableFromLocalStorage;
+
+tableFromLocalStorage = getFromLocalStorage("table");
+
+const storedData = tableFromLocalStorage
+  ? JSON.parse(tableFromLocalStorage)
+  : null;
+
+const initialState: DataState = storedData
+  ? storedData
+  : {
+      data: [],
+    };
 
 export const dataSlice = createSlice({
   name: "data",
@@ -15,6 +34,7 @@ export const dataSlice = createSlice({
   reducers: {
     fetch_data: (state, action: PayloadAction<DataState>) => {
       state.data = action.payload.data;
+      localStorage.setItem("table", JSON.stringify(action.payload));
     },
   },
 });

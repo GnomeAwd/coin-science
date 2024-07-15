@@ -1,6 +1,15 @@
 "use client";
 import Image from "next/image";
-import { LoaderCircle, MoreHorizontal } from "lucide-react";
+import {
+  CandlestickChart,
+  CircleDollarSign,
+  CirclePercent,
+  HandCoins,
+  LoaderCircle,
+  MoreHorizontal,
+  Percent,
+  Timer,
+} from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -50,7 +59,7 @@ export default function CoinTable() {
     }).format(date);
   }
   const fetcher: BareFetcher<any> = (...args: any) =>
-  //@ts-ignore
+    //@ts-ignore
     fetch(...args).then(async (res) => {
       const data = await res.json();
       dispatch(fetch_data({ data: data }));
@@ -96,7 +105,9 @@ export default function CoinTable() {
               </h1>
               <h1>
                 <strong>All Time High:</strong> $
-                {table_data[0].data[coin].allTimeHighUSD.toFixed(2)}
+                {parseFloat(
+                  table_data[0].data[coin].allTimeHighUSD.toFixed(2)
+                ).toLocaleString()}
               </h1>
               <h1>
                 <strong>Total Supply: </strong>
@@ -115,11 +126,36 @@ export default function CoinTable() {
                 {/* <TableHead className="hidden w-[100px] sm:table-cell">
                 <span className="sr-only">Image</span>
               </TableHead> */}
-                <TableHead>Rate</TableHead>
-                <TableHead className="text-center">Volume</TableHead>
-                <TableHead className="text-center">Market Cap</TableHead>
-                <TableHead className="text-center">Vol/MCap</TableHead>
-                <TableHead className="text-center">Updated at</TableHead>
+                <TableHead>
+                  <div className="flex items-center justify-start gap-2 w-full">
+                    <CircleDollarSign className="h-4 w-4" />
+                    <h1>Rate</h1>
+                  </div>
+                </TableHead>
+                <TableHead>
+                  <div className="flex items-center justify-center gap-2 w-full">
+                    <CandlestickChart className="h-4 w-4" />
+                    <h1>Volume</h1>
+                  </div>
+                </TableHead>
+                <TableHead>
+                  <div className="flex items-center justify-center gap-2 w-full">
+                    <HandCoins className="h-4 w-4" />
+                    <h1>Market Cap</h1>
+                  </div>
+                </TableHead>
+                <TableHead>
+                  <div className="flex items-center justify-center gap-2 w-full">
+                    <Percent className="h-4 w-4" />
+                    <h1>Vol/MCap</h1>
+                  </div>
+                </TableHead>
+                <TableHead>
+                  <div className="flex items-center justify-center gap-2 w-full">
+                    <Timer className="h-4 w-4" />
+                    <h1>TimeStamp</h1>
+                  </div>
+                </TableHead>
               </TableRow>
             </TableHeader>
             {/* <ScrollArea className="h-72 w-full flex"> */}
@@ -127,13 +163,24 @@ export default function CoinTable() {
               {table_data.map((entry: any) => (
                 <TableRow key={entry.timestamp}>
                   <TableCell className="font-medium w-fit xl:min-w-[300px] xl:w-[300px] py-4">
-                    ${entry.data[coin].rate.toFixed(2)}
+                    <span className="text-sm text-muted-foreground mr-2">
+                      $
+                    </span>
+                    {parseFloat(
+                      entry.data[coin].rate.toFixed(2)
+                    ).toLocaleString()}
                   </TableCell>
                   <TableCell className="text-center">
-                    ${currency.format(entry.data[coin].volume)}
+                    <span className="text-sm text-muted-foreground mr-2">
+                      $
+                    </span>
+                    {currency.format(entry.data[coin].volume)}
                   </TableCell>
                   <TableCell className="text-center">
-                    ${currency.format(entry.data[coin].cap)}
+                    <span className="text-sm text-muted-foreground mr-2">
+                      $
+                    </span>
+                    {currency.format(entry.data[coin].cap)}
                   </TableCell>
                   <TableCell className="text-center">
                     <Badge variant="outline">
@@ -143,7 +190,7 @@ export default function CoinTable() {
                       %
                     </Badge>
                   </TableCell>
-                  <TableCell className="text-center">
+                  <TableCell className="text-center text-muted-foreground">
                     {formatDate(entry.timestamp)}
                   </TableCell>
                 </TableRow>

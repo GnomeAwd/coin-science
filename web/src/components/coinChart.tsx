@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Area, AreaChart} from "recharts";
+import { Area, AreaChart, Bar, BarChart, Line, LineChart, YAxis} from "recharts";
 
 
 import { RootState } from "@/store/store";
@@ -47,9 +47,9 @@ export function CoinChart() {
   return (
     <ChartContainer
       config={chartConfig}
-      className="aspect-auto h-[80px] w-full"
+      className="aspect-auto h-[50px] w-full"
     >
-      <AreaChart
+      <LineChart
         accessibilityLayer
         data={chartData}
         margin={{
@@ -60,8 +60,13 @@ export function CoinChart() {
         }}
         stackOffset="wiggle"
       >
-        <Area dataKey="rate" fill={`hsl(var(--primary))`} />
-      </AreaChart>
+        <YAxis
+          hide={true}
+          domain={["dataMin", "dataMax"]}
+          allowDataOverflow={false}
+        />
+        <Line dot={false} strokeWidth={3} dataKey="rate" stroke={`hsl(var(--primary))`} type="natural" />
+      </LineChart>
     </ChartContainer>
   );
 }
