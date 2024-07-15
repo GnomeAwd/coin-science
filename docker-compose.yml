@@ -1,0 +1,7 @@
+services:
+  coin-science:
+    build: ./web
+    ports:
+      - "3000:3000"
+  coin-db:
+    build: ./backend
