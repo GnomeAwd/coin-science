@@ -208,7 +208,7 @@ export default function CoinTable() {
     );
   } else {
     return (
-      <div className="w-full flex h-[50vh] items-center justify-center">
+      <div className="w-full flex h-screen items-center justify-center">
         <LoaderCircle className="h-6 w-6 animate-spin" />
       </div>
     );

@@ -68,9 +68,9 @@ async function cleanupDatabase(
     if (documents.length > 20) {
       const idsToKeep = documents.slice(0, 20).map((doc) => doc._id);
       await collection.deleteMany({ _id: { $nin: idsToKeep } });
-      console.log(`Cleanup complete. Kept only the latest 20 data points.`);
+      // console.log(`Cleanup complete. Kept only the latest 20 data points.`);
     } else {
-      console.log(`No cleanup needed. There are 20 or fewer data points.`);
+      // console.log(`No cleanup needed. There are 20 or fewer data points.`);
     }
   } catch (error) {
     console.error("Error during cleanup:", error);
@@ -90,7 +90,7 @@ async function saveData(data: any): Promise<void> {
     const collection: Collection<DataWithTimestamp> =
       database.collection("coin_data");
     const result = await collection.insertOne(dataWithTimestamp);
-    console.log(`Data saved with _id: ${result.insertedId}`);
+    // console.log(`Data saved with _id: ${result.insertedId}`);
     // Perform cleanup to keep only the latest 20 documents
     await cleanupDatabase(collection);
   } catch (error) {
