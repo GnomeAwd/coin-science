@@ -11,10 +11,9 @@ This project is a mini-website for collecting and displaying real-time price dat
 
 ## Prerequisites
 
-- Node.js
-- MongoDB
-- NPM or Yarn
-- Docker (Preferable)
+- Docker (Preferable for direct build)
+- Node.js (For local)
+- NPM and PNPM (For local)
 
 
 ## Installation
@@ -30,11 +29,12 @@ This project is a mini-website for collecting and displaying real-time price dat
 
     ```bash
     git clone https://github.com/GnomeAwd/coin-science.git
-    npm install
+    .\install.sh
+    
     ```
 ## Technologies Used
 
-- **Frontend**: Next.js, TypeScript, Redux
+- **Frontend**: Next.js, TypeScript, Redux, shadcn/ui
 - **Backend**: TypeScript
 - **Database**: MongoDB
 - **API for Data**: LiveCoinWatch
