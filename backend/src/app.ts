@@ -9,12 +9,6 @@ dotenv.config();
 const uri: string = process.env.MONGODB_URI as string;
 const apiKey: string = process.env.LIVECOIN_API_KEY as string;
 
-interface ApiResponse {
-  // Define the structure of the API response
-  // Example:
-  // name: string;
-  // age: number;
-}
 
 interface DataWithTimestamp {
   timestamp: Date;
@@ -90,7 +84,7 @@ async function saveData(data: any): Promise<void> {
     const collection: Collection<DataWithTimestamp> =
       database.collection("coin_data");
     const result = await collection.insertOne(dataWithTimestamp);
-    // console.log(`Data saved with _id: ${result.insertedId}`);
+    console.log(`Data saved with _id: ${result.insertedId}`);
     // Perform cleanup to keep only the latest 20 documents
     await cleanupDatabase(collection);
   } catch (error) {
