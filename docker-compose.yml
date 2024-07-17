@@ -1,13 +1,8 @@
 services:
   coin-science:
     build: ./web
-    environment:
-      - MONGODB_URI=mongodb+srv://admin_user:5oyGODuBzuJJlCrf@cluster1.1p5auhj.mongodb.net
-      - LIVECOIN_API_KEY=e06f066d-db82-4ebb-9808-4bda94bd3f56
     ports:
       - "3000:3000"
   coin-db:
     build: ./backend
-    environment:
-      - MONGODB_URI=mongodb+srv://admin_user:5oyGODuBzuJJlCrf@cluster1.1p5auhj.mongodb.net
-      - LIVECOIN_API_KEY=e06f066d-db82-4ebb-9808-4bda94bd3f56
+
